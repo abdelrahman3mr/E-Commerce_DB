@@ -1,7 +1,86 @@
 # E-Commerce_DB
 E-commerce data base for trading of goods and services online
+## DB schema script
+- Create Categories Table
+```sql
+CREATE TABLE `category` (
+  `category_id` int NOT NULL AUTO_INCREMENT,
+  `category_name` varchar(100) NOT NULL,
+  PRIMARY KEY (`category_id`)
+)
+```
 
-## Data Base Queries
+- Create Products Table
+```sql
+ CREATE TABLE `product` (
+  `product_id` int NOT NULL AUTO_INCREMENT,
+  `category_id` int DEFAULT NULL,
+  `name` varchar(100) NOT NULL,
+  `description` varchar(200) NOT NULL,
+  `price` decimal(15,2) NOT NULL,
+  `stock_quantity` int NOT NULL,
+  `author_id` int DEFAULT NULL,
+  PRIMARY KEY (`product_id`),
+  KEY `category_id` (`category_id`),
+  KEY `authour_fk` (`author_id`),
+  CONSTRAINT `authour_fk` FOREIGN KEY (`author_id`) REFERENCES `author` (`author_id`),
+  CONSTRAINT `product_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`),
+  CONSTRAINT `stock_quantity` CHECK ((`stock_quantity` >= 0)) 
+ )
+```
+- Create Customers Table
+  ```sql
+  CREATE TABLE `customer` (
+  `customer_id` int NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(200) NOT NULL,
+  PRIMARY KEY (`customer_id`),
+  UNIQUE KEY `email` (`email`)
+) 
+```
+- Create Orders Table
+```sql
+  CREATE TABLE `orders` (
+  `order_id` int NOT NULL AUTO_INCREMENT,
+  `customer_id` int DEFAULT NULL,
+  `order_date` date NOT NULL,
+  `total_amount` decimal(6,2) DEFAULT NULL,
+  PRIMARY KEY (`order_id`),
+  KEY `customer_id` (`customer_id`),
+  CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`),
+  CONSTRAINT `orders_chk_1` CHECK ((`total_amount` >= 0)),
+  CONSTRAINT `total_amount` CHECK ((`total_amount` >= 0))
+)
+```
+- Create Orders Table
+  ```sql
+  CREATE TABLE `orders` (
+  `order_id` int NOT NULL AUTO_INCREMENT,
+  `customer_id` int DEFAULT NULL,
+  `order_date` date NOT NULL,
+  `total_amount` decimal(6,2) DEFAULT NULL,
+  PRIMARY KEY (`order_id`),
+  KEY `customer_id` (`customer_id`),
+  CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`),
+  CONSTRAINT `orders_chk_1` CHECK ((`total_amount` >= 0)),
+  CONSTRAINT `orders_chk_2` CHECK ((`total_amount` >= 0)),
+  CONSTRAINT `orders_chk_3` CHECK ((`total_amount` >= 0)),
+  CONSTRAINT `orders_chk_4` CHECK ((`total_amount` >= 0)),
+  CONSTRAINT `orders_chk_5` CHECK ((`total_amount` >= 0)),
+  CONSTRAINT `total_amount` CHECK ((`total_amount` >= 0))
+)
+```
+-Create Author Table
+```sql
+CREATE TABLE `author` (
+  `author_id` int NOT NULL AUTO_INCREMENT,
+  `author_name` varchar(50) NOT NULL,
+  PRIMARY KEY (`author_id`)
+)
+```
+## DB Queries
 - Generate a daily report of the total revenue for a specific date.
    
 ```sql
