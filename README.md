@@ -3,7 +3,7 @@ E-commerce data base for trading of goods and services online
 
 ## Data Base Queries
 - Design a query to suggest popular products in the same category for the same author, excluding the Purchsed product from the recommendations
-   '''sql
+   ```sql
    SELECT p.product_id,
        p.name
 FROM product p
