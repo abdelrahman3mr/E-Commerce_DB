@@ -2,6 +2,7 @@
 E-commerce data base for trading of goods and services online
 
 ## ERD diagram with relationships between entities
+<img src="img/ERD_E-Commerce.png">
 ## DB schema script
 - Create Categories Table
 ```sql
