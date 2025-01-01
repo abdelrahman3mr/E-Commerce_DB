@@ -29,7 +29,7 @@ CREATE TABLE `category` (
  )
 ```
 - Create Customers Table
-  ```sql
+```sql
   CREATE TABLE `customer` (
   `customer_id` int NOT NULL AUTO_INCREMENT,
   `first_name` varchar(50) NOT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE `category` (
   PRIMARY KEY (`customer_id`),
   UNIQUE KEY `email` (`email`)
   ) 
-```
+```  
 - Create Orders Table
 ```sql
   CREATE TABLE `orders` (
@@ -52,10 +52,10 @@ CREATE TABLE `category` (
   CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`),
   CONSTRAINT `orders_chk_1` CHECK ((`total_amount` >= 0)),
   CONSTRAINT `total_amount` CHECK ((`total_amount` >= 0))
-)
+ )
 ```
 - Create Orders Table
-  ```sql
+```sql
   CREATE TABLE `orders` (
   `order_id` int NOT NULL AUTO_INCREMENT,
   `customer_id` int DEFAULT NULL,
