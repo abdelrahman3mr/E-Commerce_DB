@@ -5,41 +5,45 @@ E-commerce data base for trading of goods and services online
 - Generate a daily report of the total revenue for a specific date.
    
 ```sql
-SELECT sum(total_amount)
+SELECT sum(total_amount) AS DAILY_REVENUE ,
+       DATE(order_date) AS ORDER_DATE
 FROM orders
-WHERE order_date = '2024-12-20';
+WHERE DATE(Order_date) = '2024-12-20'
+GROUP BY order_date;
 ```
 - Generate a monthly report of the top-selling products in a given month.
 ```sql
 SELECT p.name,
-       p.stock_quantity,
        sum(od.quantity) AS quantity_sold,
-       sum(od.quantity * od.unit_price) AS total_revenue
+       sum(od.quantity * od.unit_price) AS total_revenue,
+       date_format(order_date, '%Y-%m') AS MONTH
 FROM orders o
 JOIN order_details od ON o.order_id = od.order_id
 JOIN product p ON od.product_id = p.product_id
-WHERE o.order_date like '2024-12%'
+WHERE date_format(o.order_date, '%Y-%m') = '2024-12'
 GROUP BY p.product_id,
          p.name,
-         p.stock_quantity
+         MONTH
 ORDER BY sum(od.quantity) DESC,total_revenue DESC;
 ```
 - Retrieve a list of customers who have placed orders totaling more than $500 in the past month Include customer names and their total order amounts.
 ```sql
-SELECT c.customer_id,
-       sum(total_amount) ta
+SELECT concat(c.first_name, ' ', c.last_name) AS CUSTOMER_NAME,
+       concat('$ ', sum(total_amount)) AS TOTAL_AMOUNT,
+       date_format(curdate() - interval 1 MONTH, '%Y-%m') AS Date
 FROM customer c
 JOIN orders o ON c.customer_id = o.order_id
+WHERE o.order_date >= date_format(curdate() - interval 1 MONTH, '%Y-%m')
 GROUP BY c.customer_id
-HAVING ta > 500
-ORDER BY ta DESC;
+HAVING sum(total_amount) > 500
+ORDER BY sum(total_amount) DESC;
 ```
 - Search for all products with the word "camera" in either the product name or description.
 ```sql
 SELECT *
 FROM product
-WHERE name
-  OR description like '%camera%';
+WHERE name LIKE '%camera%'
+   OR description LIKE '%camera%';
 ```
 - Design a query to suggest popular products in the same category for the same author, excluding the Purchsed product from the recommendations
  ```sql
