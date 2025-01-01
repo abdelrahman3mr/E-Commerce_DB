@@ -53,7 +53,7 @@ CREATE TABLE `category` (
   CONSTRAINT `total_amount` CHECK ((`total_amount` >= 0))
  )
 ```
-- Create Orders Table
+- Create Orders Details Table
 ```sql
   CREATE TABLE `order_details` (
   `order_detail_id` int NOT NULL AUTO_INCREMENT,
