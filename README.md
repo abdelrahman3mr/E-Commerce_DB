@@ -31,7 +31,7 @@ having ta > 500
 order by ta desc;
 ```
 - Search for all products with the word "camera" in either the product name or description.
-  ```sql
+```sql
 select * from product where name or description like '%camera%';
 ```
 - Design a query to suggest popular products in the same category for the same author, excluding the Purchsed product from the recommendations
