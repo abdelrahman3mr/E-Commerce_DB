@@ -5,34 +5,41 @@ E-commerce data base for trading of goods and services online
 - Generate a daily report of the total revenue for a specific date.
    
 ```sql
-select sum(total_amount) from orders where order_date = '2024-12-20';
+SELECT sum(total_amount)
+FROM orders
+WHERE order_date = '2024-12-20';
 ```
 - Generate a monthly report of the top-selling products in a given month.
 ```sql
-select 
-	p.name ,
-    p.stock_quantity,
-   sum(od.quantity) as quantity_sold,
-   sum(od.quantity * od.unit_price) as total_revenue
- from 
-orders o join order_details od
-on o.order_id = od.order_id
-join product p on od.product_id = p.product_id 
-where o.order_date like '2024-12%'
-group by p.product_id, p.name, p.stock_quantity
-order by sum(od.quantity) Desc,total_revenue desc;
+SELECT p.name,
+       p.stock_quantity,
+       sum(od.quantity) AS quantity_sold,
+       sum(od.quantity * od.unit_price) AS total_revenue
+FROM orders o
+JOIN order_details od ON o.order_id = od.order_id
+JOIN product p ON od.product_id = p.product_id
+WHERE o.order_date like '2024-12%'
+GROUP BY p.product_id,
+         p.name,
+         p.stock_quantity
+ORDER BY sum(od.quantity) DESC,total_revenue DESC;
 ```
 - Retrieve a list of customers who have placed orders totaling more than $500 in the past month Include customer names and their total order amounts.
 ```sql
-select c.customer_id,sum(total_amount) ta from customer c
-join orders o on c.customer_id = o.order_id 
-group by c.customer_id
-having ta > 500
-order by ta desc;
+SELECT c.customer_id,
+       sum(total_amount) ta
+FROM customer c
+JOIN orders o ON c.customer_id = o.order_id
+GROUP BY c.customer_id
+HAVING ta > 500
+ORDER BY ta DESC;
 ```
 - Search for all products with the word "camera" in either the product name or description.
 ```sql
-select * from product where name or description like '%camera%';
+SELECT *
+FROM product
+WHERE name
+  OR description like '%camera%';
 ```
 - Design a query to suggest popular products in the same category for the same author, excluding the Purchsed product from the recommendations
  ```sql
