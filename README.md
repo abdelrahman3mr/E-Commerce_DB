@@ -26,3 +26,4 @@ E-commerce data base for trading of goods and services online
             p.name
    ORDER BY sum(od.quantity)DESC, sum(od.quantity*od.unit_price)
    LIMIT 5;
+```
