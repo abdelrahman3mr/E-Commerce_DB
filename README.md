@@ -1,5 +1,7 @@
 # **E-Commerce_DB**
 E-commerce data base for trading of goods and services online
+
+## ERD diagram with relationships between entities
 ## DB schema script
 - Create Categories Table
 ```sql
