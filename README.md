@@ -72,7 +72,7 @@ CREATE TABLE `category` (
   CONSTRAINT `total_amount` CHECK ((`total_amount` >= 0))
 )
 ```
--Create Author Table
+- Create Author Table
 ```sql
 CREATE TABLE `author` (
   `author_id` int NOT NULL AUTO_INCREMENT,
