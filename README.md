@@ -55,20 +55,18 @@ CREATE TABLE `category` (
 ```
 - Create Orders Table
 ```sql
-  CREATE TABLE `orders` (
-  `order_id` int NOT NULL AUTO_INCREMENT,
-  `customer_id` int DEFAULT NULL,
-  `order_date` date NOT NULL,
-  `total_amount` decimal(6,2) DEFAULT NULL,
-  PRIMARY KEY (`order_id`),
-  KEY `customer_id` (`customer_id`),
-  CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`),
-  CONSTRAINT `orders_chk_1` CHECK ((`total_amount` >= 0)),
-  CONSTRAINT `orders_chk_2` CHECK ((`total_amount` >= 0)),
-  CONSTRAINT `orders_chk_3` CHECK ((`total_amount` >= 0)),
-  CONSTRAINT `orders_chk_4` CHECK ((`total_amount` >= 0)),
-  CONSTRAINT `orders_chk_5` CHECK ((`total_amount` >= 0)),
-  CONSTRAINT `total_amount` CHECK ((`total_amount` >= 0))
+  CREATE TABLE `order_details` (
+  `order_detail_id` int NOT NULL AUTO_INCREMENT,
+  `order_id` int DEFAULT NULL,
+  `product_id` int DEFAULT NULL,
+  `quantity` int NOT NULL,
+  `unit_price` decimal(6,2) NOT NULL,
+  PRIMARY KEY (`order_detail_id`),
+  KEY `order_id` (`order_id`),
+  KEY `product_id` (`product_id`),
+  CONSTRAINT `order_details_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`),
+  CONSTRAINT `order_details_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`),
+  CONSTRAINT `order_details_chk_1` CHECK ((`quantity` >= 0))
 )
 ```
 - Create Author Table
