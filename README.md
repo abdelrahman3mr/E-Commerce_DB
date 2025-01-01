@@ -35,7 +35,7 @@ order by ta desc;
 select * from product where name or description like '%camera%';
 ```
 - Design a query to suggest popular products in the same category for the same author, excluding the Purchsed product from the recommendations
-   ```sql
+ ```sql
    SELECT p.product_id,
        p.name
    FROM product p
@@ -57,4 +57,4 @@ select * from product where name or description like '%camera%';
    GROUP BY p.product_id,
             p.name
    ORDER BY sum(od.quantity)DESC, sum(od.quantity*od.unit_price)
-   LIMIT 5;
+   LIMIT 5;  
