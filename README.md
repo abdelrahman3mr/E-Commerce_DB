@@ -1,4 +1,4 @@
-# <span style="color :Blue">E-Commerce_DB</span>
+# <span style="color:blue;">E-Commerce_DB</span>
 E-commerce data base for trading of goods and services online
 ## DB schema script
 - Create Categories Table
