@@ -3,9 +3,10 @@ E-commerce data base for trading of goods and services online
 
 ## Data Base Queries
  - Generate a daily report of the total revenue for a specific date.
+   
 ```sql
 select sum(total_amount) from orders where order_date = '2024-12-20';
-
+```
  - Generate a monthly report of the top-selling products in a given month.
 ```sql
 select 
