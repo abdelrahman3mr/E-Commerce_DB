@@ -50,7 +50,6 @@ CREATE TABLE `category` (
   PRIMARY KEY (`order_id`),
   KEY `customer_id` (`customer_id`),
   CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`),
-  CONSTRAINT `orders_chk_1` CHECK ((`total_amount` >= 0)),
   CONSTRAINT `total_amount` CHECK ((`total_amount` >= 0))
  )
 ```
