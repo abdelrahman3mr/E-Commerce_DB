@@ -38,7 +38,7 @@ CREATE TABLE `category` (
   `password` varchar(200) NOT NULL,
   PRIMARY KEY (`customer_id`),
   UNIQUE KEY `email` (`email`)
-) 
+  ) 
 ```
 - Create Orders Table
 ```sql
