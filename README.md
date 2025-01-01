@@ -21,7 +21,7 @@ join product p on od.product_id = p.product_id
 where o.order_date like '2024-12%'
 group by p.product_id, p.name, p.stock_quantity
 order by sum(od.quantity) Desc,total_revenue desc;
-
+```
 - Retrieve a list of customers who have placed orders totaling more than $500 in the past month Include customer names and their total order amounts.
 ```sql
 select c.customer_id,sum(total_amount) ta from customer c
@@ -29,11 +29,11 @@ join orders o on c.customer_id = o.order_id
 group by c.customer_id
 having ta > 500
 order by ta desc;
-
+```
 - Search for all products with the word "camera" in either the product name or description.
   ```sql
 select * from product where name or description like '%camera%';
-
+```
 - Design a query to suggest popular products in the same category for the same author, excluding the Purchsed product from the recommendations
    ```sql
    SELECT p.product_id,
