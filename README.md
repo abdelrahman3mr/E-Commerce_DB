@@ -131,6 +131,7 @@ WHERE name LIKE '%camera%'
    OR description LIKE '%camera%';
 ```
 - Design a query to suggest popular products in the same category for the same author, excluding the Purchsed product from the recommendations
+-  Approach 1
  ```sql
    SELECT p.product_id,
        p.name
@@ -153,4 +154,40 @@ WHERE name LIKE '%camera%'
    GROUP BY p.product_id,
             p.name
    ORDER BY sum(od.quantity)DESC, sum(od.quantity*od.unit_price)
-   LIMIT 5;  
+   LIMIT 5;
+```
+- Approach 2
+  ```sql
+   WITH author_category AS (
+	select p.author_id, p.category_id from
+					order_details od join orders o 
+					on od.order_id = o.order_id 
+					join product p 
+					on od.product_id = p.product_id
+					where 
+					o.customer_id = '18' and
+					p.product_id = '261'
+ ), 
+ purchased_products AS (
+	select p.product_id from
+			order_details od join orders o 
+			on od.order_id = o.order_id 
+			join product p 
+			on od.product_id = p.product_id
+            join author_category ac on p.category_id = ac.category_id and p.author_id = ac.author_id
+			where 
+			o.customer_id = '18' 
+ )
+ select p.name , p.product_id
+ from 
+order_details od
+join  product p 
+on od.product_id = p.product_id
+join author_category ac on p.author_id = ac.author_id and p.category_id = ac.category_id
+where p.product_id not in (SELECT product_id FROM purchased_products)
+group by p.product_id
+ORDER BY 
+	sum(od.quantity) DESC,
+    sum(unit_price*quantity) DESC
+    LIMIT 5;
+```
