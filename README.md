@@ -177,7 +177,7 @@ WITH author_category AS
 SELECT p.name,
        p.product_id
 FROM order_details od
-JOIN product p ON od.product_id = p.product_id
+RIGHT JOIN product p ON od.product_id = p.product_id
 JOIN author_category ac ON p.author_id = ac.author_id
 AND p.category_id = ac.category_id
 WHERE p.product_id NOT IN
