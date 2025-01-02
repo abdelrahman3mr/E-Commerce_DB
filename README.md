@@ -2,9 +2,9 @@
 E-commerce data base for trading of goods and services online
 
 ## Table of Contents
--[ERD](#ERD-diagram-with-relationships-between-entities)
--[DB Schema](#DB-schema-script)
--[Queries](#DB-Queries)
+- [ERD](#ERD-diagram-with-relationships-between-entities)
+- [DB Schema](#DB-schema-script)
+- [Queries](#DB-Queries)
 
 ## ERD diagram with relationships between entities
 <img src="img/ERD_E-Commerce.png">
