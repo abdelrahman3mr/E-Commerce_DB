@@ -190,4 +190,3 @@ ORDER BY
 	sum(od.quantity) DESC,
     sum(unit_price*quantity) DESC
     LIMIT 5;
-```
